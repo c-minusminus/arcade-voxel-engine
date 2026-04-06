@@ -1,0 +1,25 @@
+{
+    "name": "arcade-voxel-engine",
+    "version": "0.0.0",
+    "description": "",
+    "dependencies": {
+        "device": "*"
+    },
+    "files": [
+        "README.md",
+        "main.blocks",
+        "main.ts"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "public": true,
+    "targetVersions": {
+        "target": "4.0.12",
+        "targetId": "arcade"
+    },
+    "supportedTargets": [
+        "arcade"
+    ],
+    "preferredEditor": "blocksprj"
+}
