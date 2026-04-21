@@ -1,4 +1,6 @@
-VoxelEngine.enableGravity(false)
+// i dont remember if this gets executed so ill just leave it commented
+
+/*VoxelEngine.enableGravity(false)
 
 VoxelEngine.enableBlockPlacing(true)
 VoxelEngine.enableBlockBreaking(true)
@@ -20,4 +22,4 @@ game.onPaint(function () {
     lastTime = now
     VoxelEngine.update(dt)
     VoxelEngine.render()
-})
+})*/
