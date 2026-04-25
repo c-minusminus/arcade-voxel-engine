@@ -1,10 +1,11 @@
 {
-    "name": "arcade-voxel-engine",
+    "name": "arcade-voxel-engine - Copy",
     "version": "0.0.0",
     "description": "",
     "dependencies": {
         "device": "*",
-        "browser-events": "*"
+        "browser-events": "*",
+        "Stats": "github:unsignedarduino/stats#758e35856bd5565e5d0e25c95cccfac79b7fc168"
     },
     "files": [
         "README.md",

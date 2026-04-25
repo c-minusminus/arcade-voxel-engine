@@ -1,4 +1,15 @@
 namespace VoxelEngine.Collision {
+    //% group="Collisions"
+    //% block="collide box defined by points x %ax y %ay z %az and x %bx y %by z %bz with direction x %dx y %dy z %dz to the world"
+    //% ax.defl=0
+    //% ay.defl=0
+    //% az.defl=0
+    //% bx.defl=1
+    //% by.defl=1
+    //% bz.defl=1
+    //% dx.defl=0
+    //% dy.defl=0
+    //% dz.defl=0
     export function hitboxDirT(
         ax: number, ay: number, az: number,
         bx: number, by: number, bz: number,
@@ -27,7 +38,7 @@ namespace VoxelEngine.Collision {
                 hitMask |= 1
                 // back off a tiny bit so we don't end up exactly on the face
                 const mag = Math.abs(dx)
-                if (mag > 0) t = Math.max(0, t - EPS / mag)
+                if (mag > 0) t = t - EPS / mag
             }
             tx = t
             curAx += dx * t
@@ -40,7 +51,7 @@ namespace VoxelEngine.Collision {
             if (t < 1) {
                 hitMask |= 2
                 const mag = Math.abs(dy)
-                if (mag > 0) t = Math.max(0, t - EPS / mag)
+                if (mag > 0) t = t - EPS / mag
             }
             ty = t
             curAy += dy * t
@@ -53,7 +64,7 @@ namespace VoxelEngine.Collision {
             if (t < 1) {
                 hitMask |= 4
                 const mag = Math.abs(dz)
-                if (mag > 0) t = Math.max(0, t - EPS / mag)
+                if (mag > 0) t = t - EPS / mag
             }
             tz = t
             curAz += dz * t
@@ -157,7 +168,7 @@ namespace VoxelEngine.Collision {
 
                     if (tEnter <= tExit && tEnter >= 0 && tEnter < smallestT) {
                         smallestT = tEnter
-                        if (smallestT <= 0) return 0
+                        //if (smallestT <= 0) return 0
                     }
                 }
             }

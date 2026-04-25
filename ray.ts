@@ -3,6 +3,15 @@ namespace VoxelEngine.Ray {
     const traceRayNoReturn = [-1]
     const rayBoxIntersectionReturn = [0, 0]
 
+    //% group="Rays"
+    //% block="trace ray at x %ox y %oy z %oz with direction x %dx y %dy z %dz with maximum amount of steps %maxDist"
+    //% ox.defl=0
+    //% oy.defl=0
+    //% oz.defl=0
+    //% dx.defl=0
+    //% dy.defl=0
+    //% dz.defl=0
+    //% maxDist.defl=25
     export function traceRay(
         ox: number, oy: number, oz: number,
         dx: number, dy: number, dz: number,
@@ -171,9 +180,9 @@ namespace VoxelEngine.Ray {
 
         // Clamp to [0,1]
         if (u < 0) u = 0
-        if (u > 1) u = 1
+        if (u > 1) u = 0.99999
         if (v < 0) v = 0
-        if (v > 1) v = 1
+        if (v > 1) v = 0.99999
 
         traceRayReturn[0] = face
         traceRayReturn[1] = dist
@@ -187,6 +196,20 @@ namespace VoxelEngine.Ray {
         return traceRayReturn
     }
 
+    //% group="Rays"
+    //% block="find enter/exit of ray at x %ox y %oy z %oz with direction x %dx y %dy z %dz to a box defined by points x %minX y %minY z %minZ and x %maxX y %maxY z %maxZ"
+    //% ox.defl=0
+    //% oy.defl=0
+    //% oz.defl=0
+    //% dx.defl=0
+    //% dy.defl=0
+    //% dz.defl=0
+    //% minX.defl=0
+    //% minY.defl=0
+    //% minZ.defl=0
+    //% maxX.defl=0
+    //% maxY.defl=0
+    //% maxZ.defl=0
     export function rayBoxIntersection(
         ox: number, oy: number, oz: number,
         dx: number, dy: number, dz: number,

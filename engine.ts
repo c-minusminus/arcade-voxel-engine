@@ -1,19 +1,24 @@
+//% color=#03AA74 weight=97 icon="\uf1b2"
+//% block="Voxel Engine"
 namespace VoxelEngine {
+    //% group="Engine"
+    //% block="init engine"
     export function init() {
-        VoxelEngine.Vars.init()
+        Vars.init()
         World.init()
-        Textures.decodeAll()
         Player.init()
 
     }
 
+    //% group="Engine"
+    //% block="update engine"
     export function render() {
         if (VoxelEngine.Features.enabled && VoxelEngine.Features.render) {
             Player.computeBasis()
 
-            const f = VoxelEngine.Player.fVec
-            const r = VoxelEngine.Player.rVec
-            const u = VoxelEngine.Player.uVec
+            const f = Player._fVec
+            const r = Player._rVec
+            const u = Player._uVec
 
             for (let py = 0; py < scene.screenHeight(); ++py) {
                 for (let px = 0; px < scene.screenWidth(); ++px) {
@@ -22,8 +27,8 @@ namespace VoxelEngine {
                     let sx = VoxelEngine.Vars.sxTable[px]
                     let sy = VoxelEngine.Vars.syTable[py]
 
-                    sx *= VoxelEngine.Player.fov
-                    sy *= VoxelEngine.Player.fov
+                    sx *= VoxelEngine.Player._fov
+                    sy *= VoxelEngine.Player._fov
 
                     // write into reusable buffer (no allocation)
                     const renderX = f[0] + r[0] * sx + u[0] * sy
@@ -32,7 +37,7 @@ namespace VoxelEngine {
 
                     // Trace ray → [face, dist, u, v]
                     const hit = VoxelEngine.Ray.traceRay(
-                        VoxelEngine.Player.x, VoxelEngine.Player.y, VoxelEngine.Player.z,
+                        VoxelEngine.Player._x, VoxelEngine.Player._y, VoxelEngine.Player._z,
                         renderX, renderY, renderZ,
                         15
                     )
@@ -45,24 +50,22 @@ namespace VoxelEngine {
                         const vCoord = hit[3]
                         const voxel = hit[4]
 
-                        const tex = VoxelEngine.Textures.textures[voxel][face]
-
                         const base = voxel * 6 + face
                         const texw = VoxelEngine.Textures.texW[base]
                         const texh = VoxelEngine.Textures.texH[base]
 
-                        const tx = (uCoord * (texw + 1)) | 0
-                        const ty = (vCoord * (texh + 1)) | 0
+                        const tx = Math.min((uCoord * texw) | 0, texw - 1)
+                        const ty = Math.min((vCoord * texh) | 0, texh - 1)
 
-                        const col = VoxelEngine.Textures.texData[voxel][face][tx + ty * (texw + 1)]
+
+                        const col = VoxelEngine.Textures.texData[voxel][face][tx + ty * texw]
+
 
                         screen.setPixel(px, py, col)
                     }
                 }
             }
             if (VoxelEngine.Features.renderSelected) {
-                const tex = VoxelEngine.Textures.textures[VoxelEngine.Vars.selectedBlock][VoxelEngine.Textures.texDisp[VoxelEngine.Vars.selectedBlock]]
-
                 const base = VoxelEngine.Vars.selectedBlock * 6 + 3
                 const w = VoxelEngine.Textures.texW[base] + 1
                 const h = VoxelEngine.Textures.texH[base] + 1
