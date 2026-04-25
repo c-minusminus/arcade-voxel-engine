@@ -1,4 +1,5 @@
-// i forget if this is executed or not, so i'l leave it like this for now
+// i forget if this is executed or not, so i'l leave it like this for now, to be safe
+/*
 VoxelEngine.enableBlockPlacing(true)
 VoxelEngine.enableBlockBreaking(true)
 
