@@ -283,42 +283,42 @@ namespace VoxelEngine {
         static get x() { return this._x }
         //% group="Player"
         //% blockCombine block="x"
-        //%v.defl=0
+        //% v.defl=0
         static set x(v: number) { this._x = v }
         //% group="Player"
         //% blockCombine block="y"
         static get y() { return this._y }
         //% group="Player"
         //% blockCombine block="y"
-        //%v.defl=0
+        //% v.defl=0
         static set y(v: number) { this._y = v }
         //% group="Player"
         //% blockCombine block="z"
         static get z() { return this._z }
         //% group="Player"
         //% blockCombine block="z"
-        //%v.defl=0
+        //% v.defl=0
         static set z(v: number) { this._z = v }
         //% group="Player"
         //% blockCombine block="yaw"
         static get yaw() { return this._yaw }
         //% group="Player"
         //% blockCombine block="yaw"
-        //%v.defl=0
+        //% v.defl=0
         static set yaw(v: number) { this._yaw = v }
         //% group="Player"
         //% blockCombine block="pitch"
         static get pitch() { return this._pitch }
         //% group="Player"
         //% blockCombine block="pitch"
-        //%v.defl=0
+        //% v.defl=0
         static set pitch(v: number) { this._pitch = v }
         //% group="Player"
         //% blockCombine block="fov"
         static get fov() { return this._fov }
         //% group="Player"
         //% blockCombine block="fov"
-        //%v.defl=0
+        //% v.defl=0
         static set fov(v: number) { this._fov = v }
         //% group="Player"
         //% blockCombine block="gravity"
@@ -332,14 +332,14 @@ namespace VoxelEngine {
         static get vy() { return this._vy }
         //% group="Player"
         //% blockCombine block="vy"
-        //%v.defl=0
+        //% v.defl=0
         static set vy(v: number) { this._vy = v }
         //% group="Player"
         //% blockCombine block="ay"
         static get ay() { return this._ay }
         //% group="Player"
         //% blockCombine block="ay"
-        //%v.defl=0
+        //% v.defl=0
         static set ay(v: number) { this._ay = v }
         // onLand is read‑only
         //% group="Player"
@@ -350,56 +350,56 @@ namespace VoxelEngine {
         static get minW() { return this._minW }
         //% group="Player"
         //% blockCombine block="min width"
-        //%v.defl=0
+        //% v.defl=0
         static set minW(v: number) { this._minW = v }
         //% group="Player"
         //% blockCombine block="min height"
         static get minH() { return this._minH }
         //% group="Player"
         //% blockCombine block="min height"
-        //%v.defl=0
+        //% v.defl=0
         static set minH(v: number) { this._minH = v }
         //% group="Player"
         //% blockCombine block="min length"
         static get minL() { return this._minL }
         //% group="Player"
         //% blockCombine block="min length"
-        //%v.defl=0
+        //% v.defl=0
         static set minL(v: number) { this._minL = v }
         //% group="Player"
         //% blockCombine block="max width"
         static get maxW() { return this._maxW }
         //% group="Player"
         //% blockCombine block="max width"
-        //%v.defl=0
+        //% v.defl=0
         static set maxW(v: number) { this._maxW = v }
         //% group="Player"
         //% blockCombine block="max height"
         static get maxH() { return this._maxH }
         //% group="Player"
         //% blockCombine block="max height"
-        //%v.defl=0
+        //% v.defl=0
         static set maxH(v: number) { this._maxH = v }
         //% group="Player"
         //% blockCombine block="max length"
         static get maxL() { return this._maxL }
         //% group="Player"
         //% blockCombine block="max length"
-        //%v.defl=0
+        //% v.defl=0
         static set maxL(v: number) { this._maxL = v }
         //% group="Player"
         //% blockCombine block="move speed"
         static get moveSpeed() { return this._moveSpeed }
         //% group="Player"
         //% blockCombine block="move speed"
-        //%v.defl=0
+        //% v.defl=0
         static set moveSpeed(v: number) { this._moveSpeed = v }
         //% group="Player"
         //% blockCombine block="turn speed"
         static get turnSpeed() { return this._turnSpeed }
         //% group="Player"
         //% blockCombine block="turn speed"
-        //%v.defl=0
+        //% v.defl=0
         static set turnSpeed(v: number) { this._turnSpeed = v }
     }
 }
