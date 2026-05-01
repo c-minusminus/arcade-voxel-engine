@@ -16,9 +16,9 @@ namespace VoxelEngine {
         if (VoxelEngine.Features.enabled && VoxelEngine.Features.render) {
             Player.computeBasis()
 
-            const f = Player._fVec
-            const r = Player._rVec
-            const u = Player._uVec
+            const f = Player.fVec
+            const r = Player.rVec
+            const u = Player.uVec
 
             for (let py = 0; py < scene.screenHeight(); ++py) {
                 for (let px = 0; px < scene.screenWidth(); ++px) {
@@ -27,8 +27,8 @@ namespace VoxelEngine {
                     let sx = VoxelEngine.Vars.sxTable[px]
                     let sy = VoxelEngine.Vars.syTable[py]
 
-                    sx *= VoxelEngine.Player._fov
-                    sy *= VoxelEngine.Player._fov
+                    sx *= VoxelEngine.Player.fov
+                    sy *= VoxelEngine.Player.fov
 
                     // write into reusable buffer (no allocation)
                     const renderX = f[0] + r[0] * sx + u[0] * sy
@@ -37,7 +37,7 @@ namespace VoxelEngine {
 
                     // Trace ray → [face, dist, u, v]
                     const hit = VoxelEngine.Ray.traceRay(
-                        VoxelEngine.Player._x, VoxelEngine.Player._y, VoxelEngine.Player._z,
+                        VoxelEngine.Player.x, VoxelEngine.Player.y, VoxelEngine.Player.z,
                         renderX, renderY, renderZ,
                         15
                     )
