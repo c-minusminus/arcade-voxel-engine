@@ -1,3 +1,4 @@
+/*
 VoxelEngine.init()
 VoxelEngine.Player.teleportPlayer(3, 3, 3)
 //VoxelEngine.World.fillWorld(0)
@@ -53,3 +54,6 @@ VoxelEngine.Textures.addSimpleTexture(img`
     1 1 1 1 1 1 1 f 1 1 1 1 1 1 1
     1 1 1 1 1 1 1 f 1 1 1 1 1 1 1
 `)
+
+/*this here is to be edited easily, because when the comment starter at the top is deleted, an error wont be generated!*/
+// also thanks to Copilot for helping me with everything!!!!!!!!
