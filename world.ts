@@ -125,7 +125,7 @@ namespace VoxelEngine.World {
 
     //% group="World"
     //% block="fill world with %id"
-    //% id.shadow=colorindexpicker
+    //% id.defl=0
     export function fillWorld(id: number) {
         for (let i = 0; i < XYZ; i++) voxels[i] = id
     }
@@ -260,6 +260,7 @@ namespace VoxelEngine.World {
 
     //% group="World"
     //% block="set %v to %amount"
+    //% amount.defl=1
     export function changeVar(v: WorldVars, amount: any) {
         switch (v) {
             case WorldVars.sizeX: resizeX(amount); break
@@ -270,6 +271,7 @@ namespace VoxelEngine.World {
 
     //% group="World"
     //% block="change %v by %amount"
+    //% value.defl=0
     export function setVar(v: WorldVars, value: any) {
         switch (v) {
             case WorldVars.sizeX: resizeX(sizeX - value); break
