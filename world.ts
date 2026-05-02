@@ -226,8 +226,8 @@ namespace VoxelEngine.World {
     }
 
     //% group="World"
-    //% block="clear world"
-    //% id.defl=0
+    //% block="fill world with %id"
+    //% id.shadow=colorindexpicker
     export function fillWorld(id: number) {
         for (let i = 0; i < XYZ; i++) voxels[i] = id
     }
@@ -259,6 +259,7 @@ namespace VoxelEngine.Textures {
 
     //% group="Textures"
     //% block="add simple block %img"
+    //% img.shadow=screen_image_picker
     export function addSimpleTexture(img: Image) {
         addTexture([img, img, img, img, img, img], 0)
     }

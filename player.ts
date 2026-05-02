@@ -331,10 +331,8 @@ namespace VoxelEngine.Player {
             case PlayerNumbers.pitch: return Player.pitch
             case PlayerNumbers.fov: return Player.fov
 
-            case PlayerNumbers.gravity: return Player.gravity ? 1 : 0
             case PlayerNumbers.vy: return Player.vy
             case PlayerNumbers.ay: return Player.ay
-            case PlayerNumbers.onLand: return Player.onLand ? 1 : 0
 
             case PlayerNumbers.minW: return Player.minW
             case PlayerNumbers.minH: return Player.minH
@@ -345,6 +343,9 @@ namespace VoxelEngine.Player {
 
             case PlayerNumbers.moveSpeed: return Player.moveSpeed
             case PlayerNumbers.turnSpeed: return Player.turnSpeed
+
+            case PlayerNumbers.gravity: return Player.gravity
+            case PlayerNumbers.onLand: return Player.onLand
         }
         return 0
     }
@@ -365,7 +366,6 @@ namespace VoxelEngine.Player {
             case PlayerNumbers.pitch: Player.pitch = value; break
             case PlayerNumbers.fov: Player.fov = value; break
 
-            case PlayerNumbers.gravity: Player.gravity = (value != 0); break
             case PlayerNumbers.vy: Player.vy = value; break
             case PlayerNumbers.ay: Player.ay = value; break
 
@@ -378,6 +378,9 @@ namespace VoxelEngine.Player {
 
             case PlayerNumbers.moveSpeed: Player.moveSpeed = value; break
             case PlayerNumbers.turnSpeed: Player.turnSpeed = value; break
+
+            case PlayerNumbers.gravity: Player.gravity = value; break
+            case PlayerNumbers.onLand: Player.onLand = value; break
         }
     }
 
@@ -410,8 +413,8 @@ namespace VoxelEngine.Player {
             case PlayerNumbers.moveSpeed: Player.moveSpeed += amount; break
             case PlayerNumbers.turnSpeed: Player.turnSpeed += amount; break
 
-            // gravity and onLand are booleans → ignore changeVar
+            case PlayerNumbers.gravity: Player.gravity += amount; break
+            case PlayerNumbers.onLand: Player.onLand += amount; break
         }
     }
-
 }
