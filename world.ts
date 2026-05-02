@@ -1,3 +1,13 @@
+enum WorldVars {
+    sizeX,
+    sizeY,
+    sizeZ,
+    X,
+    XY,
+    XYZ,
+    voxels
+}
+
 namespace VoxelEngine.World {
     export let sizeX = 6
     export let sizeY = 6
@@ -105,6 +115,17 @@ namespace VoxelEngine.World {
             }
         }
     }
+
+    //% group="World"
+    //% block="fill world with %id"
+    //% id.shadow=colorindexpicker
+    export function fillWorld(id: number) {
+        for (let i = 0; i < XYZ; i++) voxels[i] = id
+    }
+
+
+
+
 
     //% group="World"
     //% block="resize world X by %amount"
@@ -226,10 +247,55 @@ namespace VoxelEngine.World {
     }
 
     //% group="World"
-    //% block="fill world with %id"
-    //% id.shadow=colorindexpicker
-    export function fillWorld(id: number) {
-        for (let i = 0; i < XYZ; i++) voxels[i] = id
+    //% block="set world size X to %size"
+    //% amount.defl=1
+    export function setX(size: number) {
+    }
+
+    //% group="World"
+    //% block="set world size Y to %size"
+    //% amount.defl=1
+    export function setY(size: number) {
+    }
+
+    //% group="World"
+    //% block="set world size Z to %size"
+    //% amount.defl=1
+    export function setZ(size: number) {
+    }
+
+    //% group="Player"
+    //% block="get %v"
+    export function getVar(v: WorldVars): any {
+        switch(v) {
+            case WorldVars.sizeX: return sizeX; break
+            case WorldVars.sizeY: return sizeY; break
+            case WorldVars.sizeZ: return sizeZ; break
+            case WorldVars.X: return X; break
+            case WorldVars.XY: return XY; break
+            case WorldVars.XYZ: return XYZ; break
+            case WorldVars.voxels: return voxels; break
+        }
+    }
+
+    //% group="Player"
+    //% block="set %v to %amount"
+    export function changeVar(v: WorldVars, amount: any) {
+        switch (v) {
+            case WorldVars.sizeX: resizeX(amount); break
+            case WorldVars.sizeY: resizeY(amount); break
+            case WorldVars.sizeY: resizeZ(amount); break
+        }
+    }
+
+    //% group="Player"
+    //% block="change %v by %amount"
+    export function setVar(v: WorldVars, value: any) {
+        switch (v) {
+            case WorldVars.sizeX: resizeZ(sizeX - value); break
+            case WorldVars.sizeY: resizeZ(sizeY - value); break
+            case WorldVars.sizeY: resizeZ(sizeZ - value); break
+        }
     }
 }
 
