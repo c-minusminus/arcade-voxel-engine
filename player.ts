@@ -1,11 +1,4 @@
-enum PlayerVars {
-    //% block="fVec"
-    fVec,
-    //% block="rVec"
-    rVec,
-    //% block="uVec"
-    uVec,
-
+enum PlayerNumbers {
     //% block="x"
     x,
     //% block="y"
@@ -333,104 +326,98 @@ namespace VoxelEngine.Player {
 
     //% group="Player"
     //% block="get %v"
-    export function getVar(v: PlayerVars): any {
+    export function getVar(v: PlayerNumbers): number {
         switch (v) {
-            case PlayerVars.fVec: return fVec
-            case PlayerVars.rVec: return rVec
-            case PlayerVars.uVec: return uVec
+            case PlayerNumbers.x: return x
+            case PlayerNumbers.y: return y
+            case PlayerNumbers.z: return z
 
-            case PlayerVars.x: return x
-            case PlayerVars.y: return y
-            case PlayerVars.z: return z
+            case PlayerNumbers.yaw: return yaw
+            case PlayerNumbers.pitch: return pitch
+            case PlayerNumbers.fov: return fov
 
-            case PlayerVars.yaw: return yaw
-            case PlayerVars.pitch: return pitch
-            case PlayerVars.fov: return fov
+            case PlayerNumbers.vy: return vy
+            case PlayerNumbers.ay: return ay
 
-            case PlayerVars.vy: return vy
-            case PlayerVars.ay: return ay
+            case PlayerNumbers.minW: return minW
+            case PlayerNumbers.minH: return minH
+            case PlayerNumbers.minL: return minL
+            case PlayerNumbers.maxW: return maxW
+            case PlayerNumbers.maxH: return maxH
+            case PlayerNumbers.maxL: return maxL
 
-            case PlayerVars.minW: return minW
-            case PlayerVars.minH: return minH
-            case PlayerVars.minL: return minL
-            case PlayerVars.maxW: return maxW
-            case PlayerVars.maxH: return maxH
-            case PlayerVars.maxL: return maxL
+            case PlayerNumbers.moveSpeed: return moveSpeed
+            case PlayerNumbers.turnSpeed: return turnSpeed
 
-            case PlayerVars.moveSpeed: return moveSpeed
-            case PlayerVars.turnSpeed: return turnSpeed
-
-            case PlayerVars.gravity: return gravity
-            case PlayerVars.onLand: return onLand
+            case PlayerNumbers.gravity: return gravity ? 1 : 0
+            case PlayerNumbers.onLand: return onLand ? 1 : 0
         }
         return 0
     }
 
     //% group="Player"
     //% block="set %v to %amount"
-    export function setVar(v: PlayerVars, value: any) {
+    export function setVar(v: PlayerNumbers, value: number) {
         switch (v) {
-            case PlayerVars.fVec: fVec = value; break
-            case PlayerVars.rVec: rVec = value; break
-            case PlayerVars.uVec: uVec = value; break
+            case PlayerNumbers.x: x = value; break
+            case PlayerNumbers.y: y = value; break
+            case PlayerNumbers.z: z = value; break
 
-            case PlayerVars.x: x = value; break
-            case PlayerVars.y: y = value; break
-            case PlayerVars.z: z = value; break
+            case PlayerNumbers.yaw: yaw = value; break
+            case PlayerNumbers.pitch: pitch = value; break
+            case PlayerNumbers.fov: fov = value; break
 
-            case PlayerVars.yaw: yaw = value; break
-            case PlayerVars.pitch: pitch = value; break
-            case PlayerVars.fov: fov = value; break
+            case PlayerNumbers.vy: vy = value; break
+            case PlayerNumbers.ay: ay = value; break
 
-            case PlayerVars.vy: vy = value; break
-            case PlayerVars.ay: ay = value; break
+            case PlayerNumbers.minW: minW = value; break
+            case PlayerNumbers.minH: minH = value; break
+            case PlayerNumbers.minL: minL = value; break
+            case PlayerNumbers.maxW: maxW = value; break
+            case PlayerNumbers.maxH: maxH = value; break
+            case PlayerNumbers.maxL: maxL = value; break
 
-            case PlayerVars.minW: minW = value; break
-            case PlayerVars.minH: minH = value; break
-            case PlayerVars.minL: minL = value; break
-            case PlayerVars.maxW: maxW = value; break
-            case PlayerVars.maxH: maxH = value; break
-            case PlayerVars.maxL: maxL = value; break
+            case PlayerNumbers.moveSpeed: moveSpeed = value; break
+            case PlayerNumbers.turnSpeed: turnSpeed = value; break
 
-            case PlayerVars.moveSpeed: moveSpeed = value; break
-            case PlayerVars.turnSpeed: turnSpeed = value; break
-
-            case PlayerVars.gravity: gravity = value; break
-            case PlayerVars.onLand: onLand = value; break
+            case PlayerNumbers.gravity: gravity = (value==1); break
+            case PlayerNumbers.onLand: onLand = (value==1); break
         }
     }
 
     //% group="Player"
     //% block="change %v by %amount"
-    export function changeVar(v: PlayerVars, amount: any) {
+    export function changeVar(v: PlayerNumbers, amount: number) {
         switch (v) {
-            case PlayerVars.fVec: fVec += amount; break
-            case PlayerVars.rVec: rVec += amount; break
-            case PlayerVars.uVec: uVec += amount; break
+            case PlayerNumbers.x: x += amount; break
+            case PlayerNumbers.y: y += amount; break
+            case PlayerNumbers.z: z += amount; break
 
-            case PlayerVars.x: x += amount; break
-            case PlayerVars.y: y += amount; break
-            case PlayerVars.z: z += amount; break
+            case PlayerNumbers.yaw: yaw += amount; break
+            case PlayerNumbers.pitch: pitch += amount; break
+            case PlayerNumbers.fov: fov += amount; break
 
-            case PlayerVars.yaw: yaw += amount; break
-            case PlayerVars.pitch: pitch += amount; break
-            case PlayerVars.fov: fov += amount; break
+            case PlayerNumbers.vy: vy += amount; break
+            case PlayerNumbers.ay: ay += amount; break
 
-            case PlayerVars.vy: vy += amount; break
-            case PlayerVars.ay: ay += amount; break
+            case PlayerNumbers.minW: minW += amount; break
+            case PlayerNumbers.minH: minH += amount; break
+            case PlayerNumbers.minL: minL += amount; break
+            case PlayerNumbers.maxW: maxW += amount; break
+            case PlayerNumbers.maxH: maxH += amount; break
+            case PlayerNumbers.maxL: maxL += amount; break
 
-            case PlayerVars.minW: minW += amount; break
-            case PlayerVars.minH: minH += amount; break
-            case PlayerVars.minL: minL += amount; break
-            case PlayerVars.maxW: maxW += amount; break
-            case PlayerVars.maxH: maxH += amount; break
-            case PlayerVars.maxL: maxL += amount; break
+            case PlayerNumbers.moveSpeed: moveSpeed += amount; break
+            case PlayerNumbers.turnSpeed: turnSpeed += amount; break
 
-            case PlayerVars.moveSpeed: moveSpeed += amount; break
-            case PlayerVars.turnSpeed: turnSpeed += amount; break
-
-            case PlayerVars.gravity: gravity += amount; break
-            case PlayerVars.onLand: onLand += amount; break
+            case PlayerNumbers.gravity: gravity !== (amount==1); break
+            case PlayerNumbers.onLand: onLand !== (amount == 1); break
         }
+    }
+
+    //% group="Player"
+    //% block="get fowards, up, and right"
+    export function getDirections() {
+        return [fVec, uVec, rVec]
     }
 }
