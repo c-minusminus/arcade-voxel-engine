@@ -264,7 +264,7 @@ namespace VoxelEngine.World {
         switch (v) {
             case WorldVars.sizeX: resizeX(amount); break
             case WorldVars.sizeY: resizeY(amount); break
-            case WorldVars.sizeY: resizeZ(amount); break
+            case WorldVars.sizeZ: resizeZ(amount); break
         }
     }
 
@@ -272,9 +272,9 @@ namespace VoxelEngine.World {
     //% block="change %v by %amount"
     export function setVar(v: WorldVars, value: any) {
         switch (v) {
-            case WorldVars.sizeX: resizeZ(sizeX - value); break
-            case WorldVars.sizeY: resizeZ(sizeY - value); break
-            case WorldVars.sizeY: resizeZ(sizeZ - value); break
+            case WorldVars.sizeX: resizeX(sizeX - value); break
+            case WorldVars.sizeY: resizeY(sizeY - value); break
+            case WorldVars.sizeZ: resizeZ(sizeZ - value); break
         }
     }
 }
