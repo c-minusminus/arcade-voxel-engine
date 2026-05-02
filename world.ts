@@ -244,7 +244,7 @@ namespace VoxelEngine.World {
         }
     }
 
-    //% group="Player"
+    //% group="World"
     //% block="get %v"
     export function getVar(v: WorldVars): any {
         switch(v) {
@@ -258,7 +258,7 @@ namespace VoxelEngine.World {
         }
     }
 
-    //% group="Player"
+    //% group="World"
     //% block="set %v to %amount"
     export function changeVar(v: WorldVars, amount: any) {
         switch (v) {
@@ -268,7 +268,7 @@ namespace VoxelEngine.World {
         }
     }
 
-    //% group="Player"
+    //% group="World"
     //% block="change %v by %amount"
     export function setVar(v: WorldVars, value: any) {
         switch (v) {
