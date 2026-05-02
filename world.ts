@@ -1,10 +1,17 @@
 enum WorldVars {
+    //% block="sizeX"
     sizeX,
+    //% block="sizeY"
     sizeY,
+    //% block="sizeZ"
     sizeZ,
+    //% block="X"
     X,
+    //% block="XY"
     XY,
+    //% block="XYZ"
     XYZ,
+    //% block="voxels"
     voxels
 }
 
@@ -127,9 +134,6 @@ namespace VoxelEngine.World {
 
 
 
-    //% group="World"
-    //% block="resize world X by %amount"
-    //% amount.defl=1
     export function resizeX(amount: number) {
         if (amount == 0) return
 
@@ -172,9 +176,6 @@ namespace VoxelEngine.World {
         }
     }
 
-    //% group="World"
-    //% block="resize world Y by %amount"
-    //% amount.defl=1
     export function resizeY(amount: number) {
         if (amount === 0) return;
         const oldX = sizeX;
@@ -212,9 +213,6 @@ namespace VoxelEngine.World {
         XYZ = XY * sizeZ;
     }
 
-    //% group="World"
-    //% block="resize world Z by %amount"
-    //% amount.defl=1
     export function resizeZ(amount: number) {
         if (amount == 0) return
 
@@ -244,24 +242,6 @@ namespace VoxelEngine.World {
                 }
             }
         }
-    }
-
-    //% group="World"
-    //% block="set world size X to %size"
-    //% amount.defl=1
-    export function setX(size: number) {
-    }
-
-    //% group="World"
-    //% block="set world size Y to %size"
-    //% amount.defl=1
-    export function setY(size: number) {
-    }
-
-    //% group="World"
-    //% block="set world size Z to %size"
-    //% amount.defl=1
-    export function setZ(size: number) {
     }
 
     //% group="Player"
