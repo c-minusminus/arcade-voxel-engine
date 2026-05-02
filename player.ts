@@ -325,7 +325,7 @@ namespace VoxelEngine.Player {
 
 
     //% group="Player"
-    //% block="get %v"
+    //% block="get player %v"
     export function getVar(v: PlayerNumbers): number {
         switch (v) {
             case PlayerNumbers.x: return x
@@ -356,7 +356,7 @@ namespace VoxelEngine.Player {
     }
 
     //% group="Player"
-    //% block="set %v to %amount"
+    //% block="set player %v to %value"
     export function setVar(v: PlayerNumbers, value: number) {
         switch (v) {
             case PlayerNumbers.x: x = value; break
@@ -386,7 +386,7 @@ namespace VoxelEngine.Player {
     }
 
     //% group="Player"
-    //% block="change %v by %amount"
+    //% block="change player %v by %amount"
     export function changeVar(v: PlayerNumbers, amount: number) {
         switch (v) {
             case PlayerNumbers.x: x += amount; break

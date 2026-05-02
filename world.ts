@@ -290,6 +290,12 @@ namespace VoxelEngine.Textures {
     //% group="Textures"
     //% block="add texture with faces %faces and display face %displayFace"
     export function addTexture(faces: Image[], displayFace: number) {
+        function byteToBuffer(n: number): Buffer {
+            let buf = Buffer.create(1)
+            buf.setNumber(NumberFormat.Int8LE, 0, n)
+            return buf
+        }
+
         let arr: Buffer[] = []
         for (const face of faces) {
             texW = texW.concat(byteToBuffer(face.width))
@@ -314,8 +320,3 @@ namespace VoxelEngine.Textures {
 
 }
 
-function byteToBuffer(n: number): Buffer {
-    let buf = Buffer.create(1)
-    buf.setNumber(NumberFormat.Int8LE, 0, n)
-    return buf
-}
