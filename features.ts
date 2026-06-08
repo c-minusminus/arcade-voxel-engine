@@ -8,60 +8,51 @@ namespace VoxelEngine.Features {
     export let enabled = false
 }
 
+enum VoxelEngineEnable {
+    //% block="block breaking"
+    blockBreaking,
+    //% block="block placing"
+    blockPlacing,
+    //% block="collide player with world"
+    hitboxDetection,
+    //% block="show world"
+    render,
+    //% block="update player"
+    updatePlayer,
+    //% block="render selected block"
+    renderSelected,
+    //% block="engine enabled"
+    enabled,
+}
+
 namespace VoxelEngine {
-    //% group="Features"
-    //% block="enable block breaking %on"
-    //% on.shadow="toggleOnOff"
-    //% on.defl=true
-    export function enableBlockBreaking(on: boolean) {
-        Features.blockBreaking = on
-    }
-
-    //% group="Features"
-    //% block="enable block placing %on"
-    //% on.shadow="toggleOnOff"
-    //% on.defl=true
-    export function enableBlockPlacing(on: boolean) {
-        Features.blockPlacing = on
-    }
-
-    //% group="Features"
-    //% block="enable player hitbox %on"
-    //% on.shadow="toggleOnOff"
-    //% on.defl=true
-    export function enablePlayerHitbox(on: boolean) {
-        Features.hitboxDetection = on
-    }
-
-    //% group="Features"
-    //% block="enable rendering %on"
-    //% on.shadow="toggleOnOff"
-    //% on.defl=true
-    export function enableRendering(on: boolean) {
-        Features.render = on
-    }
-
-    //% group="Features"
-    //% block="enable rendering selected block %on"
-    //% on.shadow="toggleOnOff"
-    //% on.defl=true
-    export function enableRenderingSelected(on: boolean) {
-        Features.renderSelected = on
-    }
-
-    //% group="Features"
-    //% block="enable player updating %on"
-    //% on.shadow="toggleOnOff"
-    //% on.defl=true
-    export function enablePlayerUpdating(on: boolean) {
-        Features.updatePlayer = on
-    }
-
-    //% group="Features"
-    //% block="enable engine %on"
-    //% on.shadow="toggleOnOff"
-    //% on.defl=true
-    export function enabled(on: boolean) {
-        Features.enabled = on
+    //% group="Engine"
+    //% block="set feature %enable to %enabled"
+    //% enabled.shadow="toggleOnOff"
+    //% enabled.defl=true
+    export function setFeature(enable: VoxelEngineEnable, enabled: boolean) {
+        switch(enable) {
+            case VoxelEngineEnable.blockBreaking:
+                VoxelEngine.Features.blockBreaking = enabled
+                break;
+            case VoxelEngineEnable.blockPlacing:
+                VoxelEngine.Features.blockPlacing = enabled
+                break;
+            case VoxelEngineEnable.hitboxDetection:
+                VoxelEngine.Features.hitboxDetection = enabled
+                break;
+            case VoxelEngineEnable.render:
+                VoxelEngine.Features.render = enabled
+                break;
+            case VoxelEngineEnable.updatePlayer:
+                VoxelEngine.Features.updatePlayer = enabled
+                break;
+            case VoxelEngineEnable.renderSelected:
+                VoxelEngine.Features.renderSelected = enabled
+                break;
+            case VoxelEngineEnable.enabled:
+                VoxelEngine.Features.enabled = enabled
+                break;
+        }
     }
 }

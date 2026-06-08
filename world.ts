@@ -85,7 +85,7 @@ namespace VoxelEngine.World {
     }
 
     //% group="World"
-    //% block="fill from x %x1 y %y1 z %z1 to x %x2 y %y2 z %z2 with %id"
+    //% block="fill from x %x0 y %y0 z %z0 to x %x1 y %y1 z %z1 with %id"
     //% x0.defl=0
     //% y0.defl=0
     //% z0.defl=0
@@ -261,7 +261,7 @@ namespace VoxelEngine.World {
     //% group="World"
     //% block="set %v to %amount"
     //% amount.defl=1
-    export function changeVar(v: WorldVars, amount: any) {
+    export function setVar(v: WorldVars, amount: any) {
         switch (v) {
             case WorldVars.sizeX: resizeX(amount); break
             case WorldVars.sizeY: resizeY(amount); break
@@ -270,13 +270,13 @@ namespace VoxelEngine.World {
     }
 
     //% group="World"
-    //% block="change %v by %amount"
+    //% block="change %v by %value"
     //% value.defl=0
-    export function setVar(v: WorldVars, value: any) {
+    export function changeVar(v: WorldVars, value: any) {
         switch (v) {
-            case WorldVars.sizeX: resizeX(sizeX - value); break
-            case WorldVars.sizeY: resizeY(sizeY - value); break
-            case WorldVars.sizeZ: resizeZ(sizeZ - value); break
+            case WorldVars.sizeX: resizeX(sizeX + value); break
+            case WorldVars.sizeY: resizeY(sizeY + value); break
+            case WorldVars.sizeZ: resizeZ(sizeZ + value); break
         }
     }
 }

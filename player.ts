@@ -305,14 +305,14 @@ namespace VoxelEngine.Player {
     }
 
     //% group="Player"
-    //% block="teleport player to x %x y %y z %z"
-    //% x.defl=0
-    //% y.defl=0
-    //% z.defl=0
-    export function teleportPlayer(x: number, y: number, z: number) {
-        x = x
-        y = y
-        z = z
+    //% block="teleport player to x %newX y %newY z %newZ"
+    //% newX.defl=0
+    //% newY.defl=0
+    //% newZ.defl=0
+    export function teleportPlayer(newX: number, newY: number, newZ: number) {
+        x = newX
+        y = newY
+        z = newZ
     }
 
     //% group="Player"
@@ -410,8 +410,8 @@ namespace VoxelEngine.Player {
             case PlayerNumbers.moveSpeed: moveSpeed += amount; break
             case PlayerNumbers.turnSpeed: turnSpeed += amount; break
 
-            case PlayerNumbers.gravity: gravity !== (amount==1); break
-            case PlayerNumbers.onLand: onLand !== (amount == 1); break
+            case PlayerNumbers.gravity: gravity = gravity == (amount==0); break
+            case PlayerNumbers.onLand: onLand = (amount == 1); break
         }
     }
 
