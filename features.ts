@@ -8,19 +8,32 @@ namespace VoxelEngine.Features {
     export let enabled = false
 }
 
+
 enum VoxelEngineEnable {
+    //% block="block breaking"
     blockBreaking,
+    //% block="block placing"
     blockPlacing,
+    //% block="collide player with world"
     hitboxDetection,
+    //% block="show world"
     render,
+    //% block="update player"
     updatePlayer,
+    //% block="render selected block"
     renderSelected,
+    //% block="engine enabled"
     enabled,
 }
 
+
 namespace VoxelEngine {
+    //% group="Engine"
+    //% block="set feature %enable to %enabled"
+    //% enabled.shadow="toggleOnOff"
+    //% enabled.defl=true
     export function setFeature(enable: VoxelEngineEnable, enabled: boolean) {
-        switch(enable) {
+        switch (enable) {
             case VoxelEngineEnable.blockBreaking:
                 VoxelEngine.Features.blockBreaking = enabled
                 break;
@@ -45,3 +58,4 @@ namespace VoxelEngine {
         }
     }
 }
+

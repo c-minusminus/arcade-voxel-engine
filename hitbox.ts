@@ -1,15 +1,29 @@
 namespace VoxelEngine.Collision {
+    //% group="Collisions"
+    //% block="collide box defined by points x %ax y %ay z %az and x %bx y %by z %bz with direction x %dx y %dy z %dz to the world"
+    //% ax.defl=0
+    //% ay.defl=0
+    //% az.defl=0
+    //% bx.defl=1
+    //% by.defl=1
+    //% bz.defl=1
+    //% dx.defl=0
+    //% dy.defl=0
+    //% dz.defl=0
     export function hitboxDirT(
         ax: number, ay: number, az: number,
         bx: number, by: number, bz: number,
         dx: number, dy: number, dz: number
     ): number[] {
 
+
         let tx = 1
         let ty = 1
         let tz = 1
 
+
         let hitMask = 0
+
 
         let curAx = ax
         let curAy = ay
@@ -18,7 +32,9 @@ namespace VoxelEngine.Collision {
         let curBy = by
         let curBz = bz
 
+
         const EPS = 0.001
+
 
         // --- X movement ---
         if (dx !== 0) {
@@ -34,6 +50,7 @@ namespace VoxelEngine.Collision {
             curBx += dx * t
         }
 
+
         // --- Y movement ---
         if (dy !== 0) {
             let t = sweepAABB(curAx, curAy, curAz, curBx, curBy, curBz, 0, dy, 0)
@@ -46,6 +63,7 @@ namespace VoxelEngine.Collision {
             curAy += dy * t
             curBy += dy * t
         }
+
 
         // --- Z movement ---
         if (dz !== 0) {
@@ -60,14 +78,17 @@ namespace VoxelEngine.Collision {
             curBz += dz * t
         }
 
+
         return [tx, ty, tz, hitMask]
     }
+
 
     export function sweepAABB(
         ax: number, ay: number, az: number,
         bx: number, by: number, bz: number,
         dx: number, dy: number, dz: number
     ): number {
+
 
         // Swept AABB bounds
         let minX = ax < ax + dx ? ax : ax + dx
@@ -77,24 +98,30 @@ namespace VoxelEngine.Collision {
         let minZ = az < az + dz ? az : az + dz
         let maxZ = bz > bz + dz ? bz : bz + dz
 
+
         // Clamp to world
         if (minX < 0) minX = 0
         if (minY < 0) minY = 0
         if (minZ < 0) minZ = 0
 
+
         let minXi = Math.floor(minX)
         let minYi = Math.floor(minY)
         let minZi = Math.floor(minZ)
+
 
         let maxXi = Math.ceil(maxX)
         let maxYi = Math.ceil(maxY)
         let maxZi = Math.ceil(maxZ)
 
+
         if (maxXi > VoxelEngine.World.sizeX) maxXi = VoxelEngine.World.sizeX
         if (maxYi > VoxelEngine.World.sizeY) maxYi = VoxelEngine.World.sizeY
         if (maxZi > VoxelEngine.World.sizeZ) maxZi = VoxelEngine.World.sizeZ
 
+
         let smallestT = 1
+
 
         // Loop voxels
         for (let z = minZi; z < maxZi; z++) {
@@ -103,12 +130,15 @@ namespace VoxelEngine.Collision {
                 const i = base + y * VoxelEngine.World.X
                 for (let x = minXi; x < maxXi; x++) {
 
+
                     const idx = i + x
                     if (VoxelEngine.World.voxels[idx] === 0) continue
+
 
                     // Inline slab test
                     let tEnter = 0
                     let tExit = 1
+
 
                     // X
                     if (dx > 0) {
@@ -125,6 +155,7 @@ namespace VoxelEngine.Collision {
                         if (bx <= x || ax >= x + 1) continue
                     }
 
+
                     // Y
                     if (dy > 0) {
                         const t1 = (y - by) / dy
@@ -139,6 +170,7 @@ namespace VoxelEngine.Collision {
                     } else {
                         if (by <= y || ay >= y + 1) continue
                     }
+
 
                     // Z
                     if (dz > 0) {
@@ -155,6 +187,7 @@ namespace VoxelEngine.Collision {
                         if (bz <= z || az >= z + 1) continue
                     }
 
+
                     if (tEnter <= tExit && tEnter >= 0 && tEnter < smallestT) {
                         smallestT = tEnter
                         //if (smallestT <= 0) return 0
@@ -163,6 +196,10 @@ namespace VoxelEngine.Collision {
             }
         }
 
+
         return smallestT
     }
 }
+
+
+
