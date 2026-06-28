@@ -10,9 +10,7 @@ enum WorldVars {
     //% block="XY"
     XY,
     //% block="XYZ"
-    XYZ,
-    //% block="voxels"
-    voxels
+    XYZ
 }
 
 
@@ -44,13 +42,24 @@ namespace VoxelEngine.World {
     }
 
 
-
+    //% group="World"
+    //% block="set world to %world"
     export function setWorld(world: number[]) {
         if (world.length == XYZ) voxels = world
     }
 
+    //% group="World"
+    //% block="get world"
+    export function getWorld() {
+        return voxels
+    }
 
-
+    //% group="World"
+    //% block="set voxel at x %x y %y z %z to %id"
+    //% x.defl=0
+    //% y.defl=0
+    //% z.defl=0
+    //% id.defl=0
     export function setVoxelXYZ(x: number, y: number, z: number, id: number) {
         if (x < 0 || y < 0 || z < 0) return
         if (x >= sizeX || y >= sizeY || z >= sizeZ) return
@@ -58,14 +67,21 @@ namespace VoxelEngine.World {
     }
 
 
-
+    //% group="World"
+    //% block="set voxel at %i to %id"
+    //% i.defl=0
+    //% id.defl=0
     export function setVoxel(i: number, id: number) {
         if (i < 0 || i >= XYZ) return
         voxels[i] = id
     }
 
 
-
+    //% group="World"
+    //% block="get voxel at x %x y %y z %z"
+    //% x.defl=0
+    //% y.defl=0
+    //% z.defl=0
     export function getVoxelXYZ(x: number, y: number, z: number): number {
         if (x < 0 || y < 0 || z < 0) return 0
         if (x >= sizeX || y >= sizeY || z >= sizeZ) return 0
@@ -73,7 +89,9 @@ namespace VoxelEngine.World {
     }
 
 
-
+    //% group="World"
+    //% block="get voxel at %i"
+    //% i.defl=0
     export function getVoxel(i: number): number {
         if (i < 0 || i >= XYZ) return 0
         return voxels[i]
@@ -127,9 +145,8 @@ namespace VoxelEngine.World {
     //% block="fill world with %id"
     //% id.defl=0
     export function fillWorld(id: number) {
-        for (let i = 0; i < XYZ; i++) voxels[i] = id
+        voxels.fill(id)
     }
-
 
     export function resizeX(amount: number) {
         if (amount == 0) return
@@ -254,7 +271,9 @@ namespace VoxelEngine.World {
     }
 
 
-    export function getVar(v: WorldVars): any {
+    //% group="World"
+    //% block="get %v"
+    export function getVar(v: WorldVars): number {
         switch (v) {
             case WorldVars.sizeX: return sizeX; break
             case WorldVars.sizeY: return sizeY; break
@@ -262,11 +281,14 @@ namespace VoxelEngine.World {
             case WorldVars.X: return X; break
             case WorldVars.XY: return XY; break
             case WorldVars.XYZ: return XYZ; break
-            case WorldVars.voxels: return voxels; break
         }
     }
 
-    export function setVar(v: WorldVars, amount: any) {
+
+    //% group="World"
+    //% block="set %v to %amount"
+    //% amount.defl=1
+    export function setVar(v: WorldVars, amount: number) {
         switch (v) {
             case WorldVars.sizeX: resizeX(amount); break
             case WorldVars.sizeY: resizeY(amount); break
@@ -274,7 +296,11 @@ namespace VoxelEngine.World {
         }
     }
 
-    export function changeVar(v: WorldVars, value: any) {
+
+    //% group="World"
+    //% block="change %v by %value"
+    //% value.defl=0
+    export function changeVar(v: WorldVars, value: number) {
         switch (v) {
             case WorldVars.sizeX: resizeX(sizeX + value); break
             case WorldVars.sizeY: resizeY(sizeY + value); break
@@ -290,6 +316,9 @@ namespace VoxelEngine.Textures {
     export let texH: Buffer = hex`00 00 00 00 00 00`
     export let texDisp: Buffer = hex`00`
 
+
+    //% group="Textures"
+    //% block="add texture with faces %faces and display face %displayFace"
     export function addTexture(faces: Image[], displayFace: number) {
         function byteToBuffer(n: number): Buffer {
             let buf = Buffer.create(1)
@@ -315,7 +344,18 @@ namespace VoxelEngine.Textures {
         VoxelEngine.Vars.blockCount = texData.length
     }
 
+
+    //% group="Textures"
+    //% block="add simple block %img"
+    //% img.shadow=screen_image_picker
     export function addSimpleTexture(img: Image) {
         addTexture([img, img, img, img, img, img], 0)
     }
+
+
 }
+
+
+
+
+
