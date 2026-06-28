@@ -323,9 +323,6 @@ namespace VoxelEngine.Textures {
     export let texH: Buffer = hex`00 00 00 00 00 00`
     export let texDisp: Buffer = hex`00`
 
-
-    //% group="Textures"
-    //% block="add texture with faces %faces and display face %displayFace"
     export function addTexture(faces: Image[], displayFace: number) {
         function byteToBuffer(n: number): Buffer {
             let buf = Buffer.create(1)
@@ -351,10 +348,6 @@ namespace VoxelEngine.Textures {
         VoxelEngine.Vars.blockCount = texData.length
     }
 
-
-    //% group="Textures"
-    //% block="add simple block %img"
-    //% img.shadow=screen_image_picker
     export function addSimpleTexture(img: Image) {
         addTexture([img, img, img, img, img, img], 0)
     }
