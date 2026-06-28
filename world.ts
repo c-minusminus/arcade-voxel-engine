@@ -254,8 +254,6 @@ namespace VoxelEngine.World {
     }
 
 
-    //% group="World"
-    //% block="get %v"
     export function getVar(v: WorldVars): any {
         switch (v) {
             case WorldVars.sizeX: return sizeX; break
@@ -268,10 +266,6 @@ namespace VoxelEngine.World {
         }
     }
 
-
-    //% group="World"
-    //% block="set %v to %amount"
-    //% amount.defl=1
     export function setVar(v: WorldVars, amount: any) {
         switch (v) {
             case WorldVars.sizeX: resizeX(amount); break
@@ -280,10 +274,6 @@ namespace VoxelEngine.World {
         }
     }
 
-
-    //% group="World"
-    //% block="change %v by %value"
-    //% value.defl=0
     export function changeVar(v: WorldVars, value: any) {
         switch (v) {
             case WorldVars.sizeX: resizeX(sizeX + value); break
