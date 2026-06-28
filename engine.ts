@@ -70,13 +70,7 @@ namespace VoxelEngine {
                     const tx = Math.min((uCoord * texw) | 0, texw - 1)
                     const ty = Math.min((vCoord * texh) | 0, texh - 1)
 
-
-
-
-                    const col = VoxelEngine.Textures.texData[voxel][tx + ty * texw + face * 6]
-
-
-
+                    const col = VoxelEngine.Textures.texData[base][tx + ty * texw]
 
                     screen.setPixel(px, py, col)
                 }
@@ -88,8 +82,10 @@ namespace VoxelEngine {
             const h = VoxelEngine.Textures.texH[base] + 1
 
 
-            const data = VoxelEngine.Textures.texData[VoxelEngine.Vars.selectedBlock]
-            let i = VoxelEngine.Textures.texDisp[VoxelEngine.Vars.selectedBlock]
+            const faceIndex = VoxelEngine.Vars.selectedBlock * 6 + VoxelEngine.Textures.texDisp[VoxelEngine.Vars.selectedBlock]
+            const data = VoxelEngine.Textures.texData[faceIndex]
+            let i = 0
+
             for (let y = w - 1; y >= 0; y--) {
                 for (let x = 0; x < w; x++) {
                     screen.setPixel(x, y, data[i++])

@@ -319,7 +319,6 @@ namespace VoxelEngine.Textures {
 
 
     //% group="Textures"
-    //% block="add texture with faces %faces and display face %displayFace"
     export function addTexture(faces: Image[], displayFace: number) {
         function byteToBuffer(n: number): Buffer {
             let buf = Buffer.create(1)
@@ -340,6 +339,8 @@ namespace VoxelEngine.Textures {
         texDisp = texDisp.concat(byteToBuffer(displayFace))
         VoxelEngine.Vars.blockCount = texData.length
     }
+    //% block="add texture with faces %faces and display face %displayFace"
+    
 
     //% group="Textures"
     //% block="add simple block %img"
@@ -373,6 +374,6 @@ namespace VoxelEngine.Textures {
         texData.push(faceBuf.slice())
 
         texDisp = texDisp.concat(Buffer.create(1))
-        VoxelEngine.Vars.blockCount = texData.length
+        VoxelEngine.Vars.blockCount = texData.length / 6
     }
 }
