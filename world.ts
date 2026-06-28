@@ -44,19 +44,13 @@ namespace VoxelEngine.World {
     }
 
 
-    //% group="World"
-    //% block="set world to %world"
+
     export function setWorld(world: number[]) {
         if (world.length == XYZ) voxels = world
     }
 
 
-    //% group="World"
-    //% block="set voxel at x %x y %y z %z to %id"
-    //% x.defl=0
-    //% y.defl=0
-    //% z.defl=0
-    //% id.defl=0
+
     export function setVoxelXYZ(x: number, y: number, z: number, id: number) {
         if (x < 0 || y < 0 || z < 0) return
         if (x >= sizeX || y >= sizeY || z >= sizeZ) return
@@ -64,21 +58,14 @@ namespace VoxelEngine.World {
     }
 
 
-    //% group="World"
-    //% block="set voxel at %i to %id"
-    //% i.defl=0
-    //% id.defl=0
+
     export function setVoxel(i: number, id: number) {
         if (i < 0 || i >= XYZ) return
         voxels[i] = id
     }
 
 
-    //% group="World"
-    //% block="get voxel at x %x y %y z %z"
-    //% x.defl=0
-    //% y.defl=0
-    //% z.defl=0
+
     export function getVoxelXYZ(x: number, y: number, z: number): number {
         if (x < 0 || y < 0 || z < 0) return 0
         if (x >= sizeX || y >= sizeY || z >= sizeZ) return 0
@@ -86,9 +73,7 @@ namespace VoxelEngine.World {
     }
 
 
-    //% group="World"
-    //% block="get voxel at %i"
-    //% i.defl=0
+
     export function getVoxel(i: number): number {
         if (i < 0 || i >= XYZ) return 0
         return voxels[i]
@@ -144,14 +129,6 @@ namespace VoxelEngine.World {
     export function fillWorld(id: number) {
         for (let i = 0; i < XYZ; i++) voxels[i] = id
     }
-
-
-
-
-
-
-
-
 
 
     export function resizeX(amount: number) {
