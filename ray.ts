@@ -3,11 +3,22 @@ namespace VoxelEngine.Ray {
     const traceRayNoReturn = [-1]
     const rayBoxIntersectionReturn = [0, 0]
 
+
+    //% group="Rays"
+    //% block="trace ray at x %ox y %oy z %oz with direction x %dx y %dy z %dz with maximum amount of steps %maxDist"
+    //% ox.defl=0
+    //% oy.defl=0
+    //% oz.defl=0
+    //% dx.defl=0
+    //% dy.defl=0
+    //% dz.defl=0
+    //% maxDist.defl=25
     export function traceRay(
         ox: number, oy: number, oz: number,
         dx: number, dy: number, dz: number,
         maxDist: number
     ): number[] {
+
 
         // --- 1. Slab intersection (fast reject) ---
         const slab = rayBoxIntersection(
@@ -18,23 +29,29 @@ namespace VoxelEngine.Ray {
         )
         if (!slab) return traceRayNoReturn
 
+
         const tEntry = slab[0]
         const tExit = slab[1]
 
+
         if (tExit < 0) return traceRayNoReturn
+
 
         const startT = tEntry > 0 ? tEntry : 0
         const limitT = tExit < maxDist ? tExit : maxDist
         if (startT > limitT) return traceRayNoReturn
 
+
         const oX = ox
         const oY = oy
         const oZ = oz
+
 
         // --- 2. Move origin to entry point ---
         ox += dx * startT
         oy += dy * startT
         oz += dz * startT
+
 
         // --- 3. Compute starting voxel ---
         let x = ox | 0
@@ -47,6 +64,7 @@ namespace VoxelEngine.Ray {
         an = oz - z
         if ((an < 0 ? -an : an) < 1e-12 && dz < 0) z--
 
+
         if (x < 0) x = 0
         if (y < 0) y = 0
         if (z < 0) z = 0
@@ -54,13 +72,16 @@ namespace VoxelEngine.Ray {
         if (y >= VoxelEngine.World.sizeY) y = VoxelEngine.World.sizeY - 1
         if (z >= VoxelEngine.World.sizeZ) z = VoxelEngine.World.sizeZ - 1
 
+
         const stepX = dx > 0 ? 1 : -1
         const stepY = dy > 0 ? 1 : -1
         const stepZ = dz > 0 ? 1 : -1
 
+
         const invDx = dx !== 0 ? 1 / dx : 1e9
         const invDy = dy !== 0 ? 1 / dy : 1e9
         const invDz = dz !== 0 ? 1 / dz : 1e9
+
 
         const nextX = stepX > 0 ? x + 1 : x
         let tMaxX = (nextX - ox) * invDx
@@ -70,38 +91,50 @@ namespace VoxelEngine.Ray {
         let tMaxZ = (nextZ - oz) * invDz
 
 
+
+
         const tDeltaX = invDx < 0 ? -invDx : invDx
         const tDeltaY = invDy < 0 ? -invDy : invDy
         const tDeltaZ = invDz < 0 ? -invDz : invDz
 
+
         let idx = x + y * VoxelEngine.World.sizeX + z * VoxelEngine.World.XY
+
 
         // --- 4. Check voxel at entry point ---
         if (startT > 0 && VoxelEngine.World.voxels[idx] != 0) {
             let face = -1
             const EPS = 1e-6
 
+
             an = ox - VoxelEngine.World.sizeX
             if ((ox < 0 ? -ox : ox) < EPS && dx > 0) face = 1   // -X
             if ((an < 0 ? -an : an) < EPS && dx < 0) face = 0   // +X
+
 
             an = oy - VoxelEngine.World.sizeY
             if ((oy < 0 ? -oy : oy) < EPS && dy > 0) face = 3   // -Y
             if ((an < 0 ? -an : an) < EPS && dy < 0) face = 2   // +Y
 
+
             an = oz - VoxelEngine.World.sizeZ
             if ((oz < 0 ? -oz : oz) < EPS && dz > 0) face = 5   // -Z
             if ((an < 0 ? -an : an) < EPS && dz < 0) face = 4   // +Z
 
+
             return computeHitUV(startT, x, y, z, oX, oY, oZ, dx, dy, dz, face, VoxelEngine.World.voxels[idx])
         }
 
+
         let tLocal = 0
+
 
         // --- 5. Main DDA loop ---
         let face = -1
 
+
         while (startT + tLocal <= limitT) {
+
 
             if (tMaxX <= tMaxY && tMaxX <= tMaxZ) {
                 face = (stepX > 0) ? 1 : 0
@@ -123,15 +156,19 @@ namespace VoxelEngine.Ray {
                 tMaxZ += tDeltaZ
             }
 
+
             if (x < 0 || y < 0 || z < 0 || x >= VoxelEngine.World.sizeX || y >= VoxelEngine.World.sizeY || z >= VoxelEngine.World.sizeZ) return traceRayNoReturn
+
 
             if (VoxelEngine.World.voxels[idx] != 0) {
                 return computeHitUV(startT + tLocal, x, y, z, oX, oY, oZ, dx, dy, dz, face, VoxelEngine.World.voxels[idx])
             }
         }
 
+
         return traceRayNoReturn
     }
+
 
     export function computeHitUV(
         dist: number,
@@ -141,13 +178,16 @@ namespace VoxelEngine.Ray {
         face: number, voxelType: number
     ): number[] {
 
+
         // Compute exact hit point
         const hx = ox + dx * dist
         const hy = oy + dy * dist
         const hz = oz + dz * dist
 
+
         let u = 0
         let v = 0
+
 
         switch (face) {
             case 0: // -X
@@ -156,11 +196,13 @@ namespace VoxelEngine.Ray {
                 v = hy - y
                 break
 
+
             case 2: // -Y
             case 3: // +Y
                 u = hx - x
                 v = hz - z
                 break
+
 
             case 4: // -Z
             case 5: // +Z
@@ -169,11 +211,13 @@ namespace VoxelEngine.Ray {
                 break
         }
 
+
         // Clamp to [0,1]
         if (u < 0) u = 0
         if (u > 1) u = 0.99999
         if (v < 0) v = 0
         if (v > 1) v = 0.99999
+
 
         traceRayReturn[0] = face
         traceRayReturn[1] = dist
@@ -184,9 +228,25 @@ namespace VoxelEngine.Ray {
         traceRayReturn[6] = y
         traceRayReturn[7] = z
 
+
         return traceRayReturn
     }
 
+
+    //% group="Rays"
+    //% block="find enter/exit of ray at x %ox y %oy z %oz with direction x %dx y %dy z %dz to a box defined by points x %minX y %minY z %minZ and x %maxX y %maxY z %maxZ"
+    //% ox.defl=0
+    //% oy.defl=0
+    //% oz.defl=0
+    //% dx.defl=0
+    //% dy.defl=0
+    //% dz.defl=0
+    //% minX.defl=0
+    //% minY.defl=0
+    //% minZ.defl=0
+    //% maxX.defl=0
+    //% maxY.defl=0
+    //% maxZ.defl=0
     export function rayBoxIntersection(
         ox: number, oy: number, oz: number,
         dx: number, dy: number, dz: number,
@@ -194,8 +254,10 @@ namespace VoxelEngine.Ray {
         maxX: number, maxY: number, maxZ: number
     ): number[] | null {
 
+
         let tmin = -Infinity
         let tmax = Infinity
+
 
         // X slab
         if (dx !== 0) {
@@ -209,6 +271,7 @@ namespace VoxelEngine.Ray {
             return null
         }
 
+
         // Y slab
         if (dy !== 0) {
             let ty1 = (minY - oy) / dy
@@ -220,6 +283,7 @@ namespace VoxelEngine.Ray {
         } else if (oy < minY || oy > maxY) {
             return null
         }
+
 
         // Z slab
         if (dz !== 0) {
@@ -233,9 +297,11 @@ namespace VoxelEngine.Ray {
             return null
         }
 
+
         // return as [tEntry, tExit] to avoid object allocation
         rayBoxIntersectionReturn[0] = tmin
         rayBoxIntersectionReturn[1] = tmax
         return rayBoxIntersectionReturn
     }
 }
+
