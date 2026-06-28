@@ -1,15 +1,4 @@
 namespace VoxelEngine.Collision {
-    //% group="Collisions"
-    //% block="collide box defined by points x %ax y %ay z %az and x %bx y %by z %bz with direction x %dx y %dy z %dz to the world"
-    //% ax.defl=0
-    //% ay.defl=0
-    //% az.defl=0
-    //% bx.defl=1
-    //% by.defl=1
-    //% bz.defl=1
-    //% dx.defl=0
-    //% dy.defl=0
-    //% dz.defl=0
     export function hitboxDirT(
         ax: number, ay: number, az: number,
         bx: number, by: number, bz: number,

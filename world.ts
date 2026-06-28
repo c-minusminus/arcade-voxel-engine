@@ -1,17 +1,10 @@
 enum WorldVars {
-    //% block="sizeX"
     sizeX,
-    //% block="sizeY"
     sizeY,
-    //% block="sizeZ"
     sizeZ,
-    //% block="X"
     X,
-    //% block="XY"
     XY,
-    //% block="XYZ"
     XYZ,
-    //% block="voxels"
     voxels
 }
 
@@ -38,61 +31,32 @@ namespace VoxelEngine.World {
         }
     }
 
-    //% group="World"
-    //% block="set world to %world"
     export function setWorld(world: number[]) {
         if (world.length == XYZ) voxels = world 
     }
 
-    //% group="World"
-    //% block="set voxel at x %x y %y z %z to %id"
-    //% x.defl=0
-    //% y.defl=0
-    //% z.defl=0
-    //% id.defl=0
     export function setVoxelXYZ(x: number, y: number, z: number, id: number) {
         if (x < 0 || y < 0 || z < 0) return
         if (x >= sizeX || y >= sizeY || z >= sizeZ) return
         voxels[x + y * sizeX + z * XY] = id
     }
 
-    //% group="World"
-    //% block="set voxel at %i to %id"
-    //% i.defl=0
-    //% id.defl=0
     export function setVoxel(i: number, id: number) {
         if (i < 0 || i >= XYZ) return
         voxels[i] = id
     }
 
-    //% group="World"
-    //% block="get voxel at x %x y %y z %z"
-    //% x.defl=0
-    //% y.defl=0
-    //% z.defl=0
     export function getVoxelXYZ(x: number, y: number, z: number): number {
         if (x < 0 || y < 0 || z < 0) return 0
         if (x >= sizeX || y >= sizeY || z >= sizeZ) return 0
         return voxels[x + y * sizeX + z * XY]
     }
 
-    //% group="World"
-    //% block="get voxel at %i"
-    //% i.defl=0
     export function getVoxel(i: number): number {
         if (i < 0 || i >= XYZ) return 0
         return voxels[i]
     }
 
-    //% group="World"
-    //% block="fill from x %x0 y %y0 z %z0 to x %x1 y %y1 z %z1 with %id"
-    //% x0.defl=0
-    //% y0.defl=0
-    //% z0.defl=0
-    //% x1.defl=0
-    //% y1.defl=0
-    //% z1.defl=0
-    //% id.defl=0
     export function fillXYZ(
         x0: number, y0: number, z0: number,
         x1: number, y1: number, z1: number,
@@ -123,9 +87,6 @@ namespace VoxelEngine.World {
         }
     }
 
-    //% group="World"
-    //% block="fill world with %id"
-    //% id.defl=0
     export function fillWorld(id: number) {
         for (let i = 0; i < XYZ; i++) voxels[i] = id
     }
@@ -244,8 +205,6 @@ namespace VoxelEngine.World {
         }
     }
 
-    //% group="World"
-    //% block="get %v"
     export function getVar(v: WorldVars): any {
         switch(v) {
             case WorldVars.sizeX: return sizeX; break
@@ -258,9 +217,6 @@ namespace VoxelEngine.World {
         }
     }
 
-    //% group="World"
-    //% block="set %v to %amount"
-    //% amount.defl=1
     export function setVar(v: WorldVars, amount: any) {
         switch (v) {
             case WorldVars.sizeX: resizeX(amount); break
@@ -269,9 +225,6 @@ namespace VoxelEngine.World {
         }
     }
 
-    //% group="World"
-    //% block="change %v by %value"
-    //% value.defl=0
     export function changeVar(v: WorldVars, value: any) {
         switch (v) {
             case WorldVars.sizeX: resizeX(sizeX + value); break
@@ -287,9 +240,7 @@ namespace VoxelEngine.Textures {
     export let texH: Buffer = hex`00 00 00 00 00 00`
     export let texDisp: Buffer = hex`00`
 
-    //% group="Textures"
-    //% block="add texture with faces %faces and display face %displayFace"
-    export function addTexture(faces: Image[], displayFace: number) {
+   export function addTexture(faces: Image[], displayFace: number) {
         function byteToBuffer(n: number): Buffer {
             let buf = Buffer.create(1)
             buf.setNumber(NumberFormat.Int8LE, 0, n)
@@ -311,10 +262,7 @@ namespace VoxelEngine.Textures {
         VoxelEngine.Vars.blockCount = texData.length
     }
 
-    //% group="Textures"
-    //% block="add simple block %img"
-    //% img.shadow=screen_image_picker
-    export function addSimpleTexture(img: Image) {
+   export function addSimpleTexture(img: Image) {
         addTexture([img, img, img, img, img, img], 0)
     }
 

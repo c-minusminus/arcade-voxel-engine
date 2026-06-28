@@ -1,10 +1,7 @@
-//% color=#03AA74 weight=97 icon="\uf1b2"
-//% block="Voxel Engine"
-//% groups='["Engine","Player","World","Textures","Features","Rays","Collisions"]'
+
 namespace VoxelEngine {
     export let lastUpdate = 0
-    //% group="Engine"
-    //% block="init engine"
+
     export function init() {
         Vars.init()
         World.init()

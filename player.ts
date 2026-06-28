@@ -1,43 +1,25 @@
 enum PlayerNumbers {
-    //% block="x"
     x,
-    //% block="y"
     y,
-    //% block="z"
     z,
 
-    //% block="yaw"
     yaw,
-    //% block="pitch"
     pitch,
-    //% block="fov"
     fov,
 
-    //% block="gravity"
     gravity,
-    //% block="vy"
     vy,
-    //% block="ay"
     ay,
-    //% block="onLand"
     onLand,
 
-    //% block="minW"
     minW,
-    //% block="minH"
     minH,
-    //% block="minL"
     minL,
-    //% block="maxW"
     maxW,
-    //% block="maxH"
     maxH,
-    //% block="maxL"
     maxL,
 
-    //% block="moveSpeed"
     moveSpeed,
-    //% block="turnSpeed"
     turnSpeed,
 }
 
@@ -73,8 +55,7 @@ namespace VoxelEngine.Player {
 
     export function init() { }
 
-    //% group="Player"
-    //% block="calculate current direction into fVec, rVec, and uVec"
+
     export function computeBasis() {
         const cp = Math.cos(Player.pitch)
         const sp = Math.sin(Player.pitch)
@@ -240,12 +221,6 @@ namespace VoxelEngine.Player {
         VoxelEngine.Vars.prevG = gNow
     }
 
-    //% group="Player"
-    //% block="trace ray at x %mx y %my, place/break % place"
-    //% place.shadow="toggleOnOff"
-    //% place.defl=true
-    //% mx.defl=0
-    //% my.defl=0
     export function interactWithWorld(place: boolean, mx: number, my: number) {
         if (mx < 0 || my < 0 || mx >= scene.screenWidth() || my >= scene.screenHeight()) return
 
@@ -304,28 +279,17 @@ namespace VoxelEngine.Player {
         VoxelEngine.World.voxels[vx + vy * VoxelEngine.World.sizeX + vz * VoxelEngine.World.XY] = VoxelEngine.Vars.selectedBlock
     }
 
-    //% group="Player"
-    //% block="teleport player to x %newX y %newY z %newZ"
-    //% newX.defl=0
-    //% newY.defl=0
-    //% newZ.defl=0
     export function teleportPlayer(newX: number, newY: number, newZ: number) {
         x = newX
         y = newY
         z = newZ
     }
 
-    //% group="Player"
-    //% block="block player is looking at"
     export function getLookBlock(): number {
         const hit = Ray.traceRay(x, y, z, fVec[0], fVec[1], fVec[2], 50)
         return hit[0] < 0 ? -1 : hit[4]
     }
 
-
-
-    //% group="Player"
-    //% block="get player %v"
     export function getVar(v: PlayerNumbers): number {
         switch (v) {
             case PlayerNumbers.x: return x
@@ -355,8 +319,6 @@ namespace VoxelEngine.Player {
         return 0
     }
 
-    //% group="Player"
-    //% block="set player %v to %value"
     export function setVar(v: PlayerNumbers, value: number) {
         switch (v) {
             case PlayerNumbers.x: x = value; break
@@ -385,8 +347,6 @@ namespace VoxelEngine.Player {
         }
     }
 
-    //% group="Player"
-    //% block="change player %v by %amount"
     export function changeVar(v: PlayerNumbers, amount: number) {
         switch (v) {
             case PlayerNumbers.x: x += amount; break
@@ -415,8 +375,6 @@ namespace VoxelEngine.Player {
         }
     }
 
-    //% group="Player"
-    //% block="get fowards, up, and right"
     export function getDirections() {
         return [fVec, uVec, rVec]
     }
