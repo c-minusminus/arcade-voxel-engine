@@ -311,7 +311,8 @@ namespace VoxelEngine.World {
 
 
 namespace VoxelEngine.Textures {
-    export let texData: Buffer[][] = [[hex``, hex``, hex``, hex``, hex``, hex``]]
+    // fill with one 
+    export let texData: Buffer[] = [hex``, hex``, hex``, hex``, hex``, hex``]
     export let texW: Buffer = hex`00 00 00 00 00 00`
     export let texH: Buffer = hex`00 00 00 00 00 00`
     export let texDisp: Buffer = hex`00`
@@ -322,12 +323,10 @@ namespace VoxelEngine.Textures {
     export function addTexture(faces: Image[], displayFace: number) {
         function byteToBuffer(n: number): Buffer {
             let buf = Buffer.create(1)
-            buf.setNumber(NumberFormat.Int8LE, 0, n)
+            buf[0] = n
             return buf
         }
 
-
-        let arr: Buffer[] = []
         for (const face of faces) {
             texW = texW.concat(byteToBuffer(face.width))
             texH = texH.concat(byteToBuffer(face.height))
@@ -335,27 +334,45 @@ namespace VoxelEngine.Textures {
 
             let faceBuf = Buffer.create(face.width * face.height)
             face.getRows(0, faceBuf)
-            arr.push(faceBuf)
+            texData.push(faceBuf)
         }
-        texData.push(arr)
-
 
         texDisp = texDisp.concat(byteToBuffer(displayFace))
         VoxelEngine.Vars.blockCount = texData.length
     }
 
-
     //% group="Textures"
     //% block="add simple block %img"
     //% img.shadow=screen_image_picker
     export function addSimpleTexture(img: Image) {
-        addTexture([img, img, img, img, img, img], 0)
+        const faceBuf = Buffer.create(img.width * img.height)
+        img.getRows(0, faceBuf)
+
+        texW = texW.concat(Buffer.create(6))
+        texH = texH.concat(Buffer.create(6))
+
+        texW[texW.length - 1] = img.width
+        texW[texW.length - 2] = img.width
+        texW[texW.length - 3] = img.width
+        texW[texW.length - 4] = img.width
+        texW[texW.length - 5] = img.width
+        texW[texW.length - 6] = img.width
+
+        texH[texH.length - 1] = img.height
+        texH[texH.length - 2] = img.height
+        texH[texH.length - 3] = img.height
+        texH[texH.length - 4] = img.height
+        texH[texH.length - 5] = img.height
+        texH[texH.length - 6] = img.height
+
+        texData.push(faceBuf)
+        texData.push(faceBuf.slice())
+        texData.push(faceBuf.slice())
+        texData.push(faceBuf.slice())
+        texData.push(faceBuf.slice())
+        texData.push(faceBuf.slice())
+
+        texDisp = texDisp.concat(Buffer.create(1))
+        VoxelEngine.Vars.blockCount = texData.length
     }
-
-
 }
-
-
-
-
-
